@@ -19,10 +19,7 @@
         <PackageReference Include="Microsoft.Extensions.Http" />
         <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" />
         <PackageReference Include="ReactiveUI.Avalonia" />
-        <PackageReference Include="ReactiveUI.SourceGenerators">
-          <PrivateAssets>all</PrivateAssets>
-          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-        </PackageReference>
+        <PackageReference Include="ReactiveUI.SourceGenerators" PrivateAssets="all" />
         <PackageReference Include="ReactiveUI.Validation" />
         <PackageReference Include="Serilog.Extensions.Logging" />
         <PackageReference Include="Serilog.Sinks.Debug" />
@@ -34,5 +31,12 @@
     <ItemGroup>
         <ProjectReference Include="..\Belarus.Launcher.Core\Belarus.Launcher.Core.csproj" />
         <ProjectReference Include="..\Belarus.Launcher.Themes.Avalonia\Belarus.Launcher.Themes.Avalonia.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <Using Include="ReactiveUI" />
+        <Using Include="ReactiveUI.Primitives" />
+        <Using Include="ReactiveUI.Validation.Extensions" />
+        <Using Include="ReactiveUI.Validation.Helpers" />
     </ItemGroup>
 </Project>

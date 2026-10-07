@@ -7,15 +7,16 @@
     <ItemGroup>
         <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" />
         <PackageReference Include="ReactiveUI" />
-        <PackageReference Include="ReactiveUI.SourceGenerators">
-          <PrivateAssets>all</PrivateAssets>
-          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-        </PackageReference>
+        <PackageReference Include="ReactiveUI.SourceGenerators" PrivateAssets="all" />
         <PackageReference Include="Serilog" />
         <PackageReference Include="Serilog.Enrichers.Thread" />
         <PackageReference Include="Serilog.Sinks.Console" />
         <PackageReference Include="Serilog.Sinks.Debug" />
         <PackageReference Include="Serilog.Sinks.File" />
-        <PackageReference Include="System.Reactive" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <Using Include="ReactiveUI" />
+        <Using Include="ReactiveUI.Primitives" />
     </ItemGroup>
 </Project>

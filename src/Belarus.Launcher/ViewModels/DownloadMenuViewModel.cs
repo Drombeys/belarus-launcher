@@ -1,6 +1,3 @@
-using System.Reactive;
-using System.Reactive.Linq;
-
 using Belarus.Launcher.Core.Manager;
 using Belarus.Launcher.Core.Services;
 using Belarus.Launcher.Core.Storage;
@@ -9,6 +6,8 @@ using Microsoft.Extensions.Logging;
 
 using ReactiveUI;
 using ReactiveUI.SourceGenerators;
+
+using ReactiveUI.Primitives.Signals;
 
 namespace Belarus.Launcher.ViewModels;
 
@@ -22,9 +21,9 @@ public partial class DownloadMenuViewModel : ReactiveObject
 
     public IApplicationLocaleManager Localization { get; private set; }
     public CancellationToken CancellationToken { get; private set; }
-    public ReactiveCommand<LauncherViewModel, Unit> StartDownload { get; private set; }
-    public ReactiveCommand<Unit, Unit> Pause { get; private set; }
-    public ReactiveCommand<Unit, Unit> Close { get; private set; }
+    public ReactiveCommand<LauncherViewModel, RxVoid> StartDownload { get; private set; }
+    public ReactiveCommand<RxVoid, RxVoid> Pause { get; private set; }
+    public ReactiveCommand<RxVoid, RxVoid> Close { get; private set; }
 
     [Reactive] public partial int DownloadProgress { get; set; } = 0;
     [Reactive] public partial string StatusProgress { get; set; } = string.Empty;
@@ -59,7 +58,7 @@ public partial class DownloadMenuViewModel : ReactiveObject
 
     public async Task UpdateAsync(LauncherViewModel launcherViewModel)
     {
-        await StartDownload.Execute(launcherViewModel);
+        await StartDownload.Execute(launcherViewModel).ToTask();
     }
 
     private void SetupCommands()

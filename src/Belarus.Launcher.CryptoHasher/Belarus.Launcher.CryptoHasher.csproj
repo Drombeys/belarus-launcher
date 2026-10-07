@@ -11,10 +11,7 @@
 
     <ItemGroup>
         <PackageReference Include="Microsoft.Extensions.Logging" />
-        <PackageReference Include="ReactiveUI.SourceGenerators">
-          <PrivateAssets>all</PrivateAssets>
-          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-        </PackageReference>
+        <PackageReference Include="ReactiveUI.SourceGenerators" PrivateAssets="all" />
         <PackageReference Include="Serilog.Extensions.Logging" />
     </ItemGroup>
 

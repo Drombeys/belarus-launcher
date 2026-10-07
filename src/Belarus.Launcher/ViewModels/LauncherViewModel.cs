@@ -1,5 +1,3 @@
-using System.Reactive;
-
 using Belarus.Launcher.Core.Helpers;
 using Belarus.Launcher.Core.Services;
 using Belarus.Launcher.Core.Storage;
@@ -27,8 +25,8 @@ public partial class LauncherViewModel : ReactiveObject
     [Reactive] public partial ReactiveObject? PageMenuViewModel { get; set; }
     [Reactive] public partial NewsSliderViewModel NewsSliderViewModel { get; set; }
 
-    public ReactiveCommand<Unit, Unit>? OpenMainRepositoryUriCommand { get; set; }
-    public ReactiveCommand<Unit, Unit>? OpenOrganizationUriCommand { get; set; }
+    public ReactiveCommand<RxVoid, RxVoid>? OpenMainRepositoryUriCommand { get; set; }
+    public ReactiveCommand<RxVoid, RxVoid>? OpenOrganizationUriCommand { get; set; }
 
     public LauncherViewModel(ILogger<LauncherViewModel>? logger, ViewModelLocator viewModelLocator,
         GameDirectoryValidator directoryValidator, IWebsiteLauncher websiteLauncher)

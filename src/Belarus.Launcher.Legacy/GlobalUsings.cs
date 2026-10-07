@@ -1,5 +1,5 @@
 global using System.IO;
-global using System.Reactive;
+global using ReactiveUI.Primitives;
 global using System.Windows;
 
 global using Belarus.Launcher.ViewModels;

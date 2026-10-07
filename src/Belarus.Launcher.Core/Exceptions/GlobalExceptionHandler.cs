@@ -1,9 +1,7 @@
 using Microsoft.Extensions.Logging;
 
 using ReactiveUI;
-using ReactiveUI.Builder;
 
-using System.Reactive;
 using System.Text;
 
 namespace Belarus.Launcher.Core.Exceptions;
@@ -40,7 +38,14 @@ public static class GlobalExceptionHandler
 
     public static IObserver<Exception> GetObservable()
     {
-        return Observer.Create<Exception>(LogException);
+        return new ActionObserver<Exception>(LogException);
+    }
+
+    private sealed class ActionObserver<T>(Action<T> onNext) : IObserver<T>
+    {
+        public void OnNext(T value) => onNext(value);
+        public void OnError(Exception error) => LogException(error);
+        public void OnCompleted() { }
     }
 
     private static void LogException(Exception ex)

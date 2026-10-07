@@ -1,16 +1,11 @@
-using System.Reactive;
-using System.Reactive.Disposables;
-using System.Reactive.Linq;
-
 using Belarus.Launcher.Core.Manager;
 using Belarus.Launcher.ViewModels.Validators;
 
 using Microsoft.Extensions.Logging;
 
 using ReactiveUI;
+using ReactiveUI.Primitives.Disposables;
 using ReactiveUI.SourceGenerators;
-using ReactiveUI.Validation.Extensions;
-using ReactiveUI.Validation.Helpers;
 
 namespace Belarus.Launcher.ViewModels;
 
@@ -20,13 +15,13 @@ public partial class StartGameViewModel : ReactiveValidationObject, IDisposable
     private readonly IWindowManager _windowManager;
     private readonly UserManager _userManager;
     private readonly StartGameViewModelValidator _startGameViewModelValidator;
-    private CompositeDisposable? _disposables;
+    private MultipleDisposable? _disposables;
 
     public IApplicationLocaleManager Localization { get; private set; }
     [Reactive] public partial string IpAddress { get; set; }
 
-    public ReactiveCommand<Unit, Unit> StartGame { get; private set; } = null!;
-    public ReactiveCommand<MainWindowViewModel, Unit> Back { get; private set; } = null!;
+    public ReactiveCommand<RxVoid, RxVoid> StartGame { get; private set; } = null!;
+    public ReactiveCommand<MainWindowViewModel, RxVoid> Back { get; private set; } = null!;
 
     public StartGameViewModel(ILogger<StartGameViewModel>? logger, UserManager userManager,
         IWindowManager windowManager, IApplicationLocaleManager localization,

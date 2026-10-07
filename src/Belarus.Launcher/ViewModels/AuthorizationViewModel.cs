@@ -1,7 +1,4 @@
 using System.Collections.ObjectModel;
-using System.Reactive;
-using System.Reactive.Disposables;
-using System.Reactive.Linq;
 
 using DynamicData;
 
@@ -14,9 +11,8 @@ using Belarus.Launcher.ViewModels.Validators;
 using Microsoft.Extensions.Logging;
 
 using ReactiveUI;
+using ReactiveUI.Primitives.Disposables;
 using ReactiveUI.SourceGenerators;
-using ReactiveUI.Validation.Extensions;
-using ReactiveUI.Validation.Helpers;
 
 namespace Belarus.Launcher.ViewModels;
 
@@ -29,7 +25,7 @@ public partial class AuthorizationViewModel : ReactiveValidationObject, IDisposa
     private readonly AuthenticationViewModelValidator _authenticationViewModelValidator;
     private readonly LauncherViewModel _launcherViewModel;
 
-    private CompositeDisposable? _disposables = null;
+    private MultipleDisposable? _disposables = null;
 
     public IApplicationLocaleManager Localization { get; private set; }
     [Reactive] public partial ObservableCollection<Locale> Languages { get; set; } = new();
@@ -38,9 +34,9 @@ public partial class AuthorizationViewModel : ReactiveValidationObject, IDisposa
 
     [Reactive] public partial string Username { get; set; } = string.Empty;
 
-    public ReactiveCommand<string, Unit> UpdateInterfaceCommand { get; private set; } = null!;
-    public ReactiveCommand<MainWindowViewModel, Unit> ShowLauncher { get; private set; } = null!;
-    public ReactiveCommand<Unit, Unit> Close { get; private set; } = null!;
+    public ReactiveCommand<string, RxVoid> UpdateInterfaceCommand { get; private set; } = null!;
+    public ReactiveCommand<MainWindowViewModel, RxVoid> ShowLauncher { get; private set; } = null!;
+    public ReactiveCommand<RxVoid, RxVoid> Close { get; private set; } = null!;
 
     public AuthorizationViewModel(ILogger<AuthorizationViewModel>? logger,
         ILauncherStorage launcherStorage, IApplicationLocaleManager localization,

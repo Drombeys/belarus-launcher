@@ -1,6 +1,4 @@
 using System.Collections.ObjectModel;
-using System.Reactive;
-using System.Reactive.Linq;
 
 using DynamicData;
 
@@ -21,7 +19,7 @@ public partial class LinkViewModel : ReactiveObject
     private readonly ILauncherStorage _launcherStorage;
 
     public ObservableCollection<WebResource> WebResources { get; set; } = [];
-    public ReactiveCommand<string, Unit> OpenUrlCommand { get; set; }
+    public ReactiveCommand<string, RxVoid> OpenUrlCommand { get; set; }
 
     public LinkViewModel(ILogger<LinkViewModel>? logger, IWebsiteLauncher websiteLauncher,
         ILauncherStorage launcherStorage)

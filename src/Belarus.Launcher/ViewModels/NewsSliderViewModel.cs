@@ -1,6 +1,4 @@
 using System.Collections.ObjectModel;
-using System.Reactive;
-using System.Reactive.Linq;
 
 using Belarus.Launcher.Core.Manager;
 using Belarus.Launcher.Core.Models;
@@ -26,8 +24,8 @@ public partial class NewsSliderViewModel : ReactiveObject
     [Reactive] public partial LinkViewModel LinkViewModel { get; set; }
     [Reactive] public partial ObservableCollection<NewsViewModel>? News { get; set; }
 
-    public ReactiveCommand<Unit, Unit> GoNext { get; set; }
-    public ReactiveCommand<Unit, Unit> GoBack { get; set; }
+    public ReactiveCommand<RxVoid, RxVoid> GoNext { get; set; }
+    public ReactiveCommand<RxVoid, RxVoid> GoBack { get; set; }
 
     public NewsSliderViewModel(ILogger<NewsSliderViewModel>? logger, ViewModelLocator viewModelLocator,
         ILauncherStorage launcherStorage, IApplicationLocaleManager localeManager)

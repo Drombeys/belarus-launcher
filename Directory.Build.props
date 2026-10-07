@@ -15,6 +15,7 @@
         <TrimmerSingleWarn>false</TrimmerSingleWarn>
     </PropertyGroup>
 
+
     <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
         <DebugSymbols>false</DebugSymbols>
         <DebugType>None</DebugType>

@@ -20,11 +20,11 @@ public partial class MenuViewModel : ViewModelBase
     [Reactive] public partial bool IsDownloadStart { get; set; } = false;
     [Reactive] public partial bool IsDownloadCheak { get; set; } = false;
 
-    public ReactiveCommand<Unit, Unit> Close { get; private set; } = null!;
-    public ReactiveCommand<Unit, Unit> PlayGame { get; private set; } = null!;
-    public ReactiveCommand<Unit, Unit> StartServer { get; private set; } = null!;
-    public ReactiveCommand<Unit, Unit> CheckUpdates { get; private set; } = null!;
-    public ReactiveCommand<Unit, Unit> StartDownload { get; private set; } = null!;
+    public ReactiveCommand<RxVoid, RxVoid> Close { get; private set; } = null!;
+    public ReactiveCommand<RxVoid, RxVoid> PlayGame { get; private set; } = null!;
+    public ReactiveCommand<RxVoid, RxVoid> StartServer { get; private set; } = null!;
+    public ReactiveCommand<RxVoid, RxVoid> CheckUpdates { get; private set; } = null!;
+    public ReactiveCommand<RxVoid, RxVoid> StartDownload { get; private set; } = null!;
 
     public MenuViewModel(IWindowManager windowManager, UserSettings userSettings, DownloadManager downloadService)
     {

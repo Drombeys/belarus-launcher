@@ -1,6 +1,3 @@
-using System.Reactive;
-using System.Reactive.Linq;
-
 using Belarus.Launcher.Core.Helpers;
 using Belarus.Launcher.Core.Manager;
 using Belarus.Launcher.Core.Storage;
@@ -20,10 +17,10 @@ public partial class GameMenuViewModel : ReactiveObject
     private readonly UserManager _userManager;
 
     public IApplicationLocaleManager Localization { get; private set; }
-    public ReactiveCommand<MainWindowViewModel, Unit> PlayGame { get; private set; }
-    public ReactiveCommand<Unit, Unit> StartServer { get; private set; }
-    public ReactiveCommand<LauncherViewModel, Unit> CheckUpdates { get; private set; }
-    public ReactiveCommand<Unit, Unit> Close { get; private set; }
+    public ReactiveCommand<MainWindowViewModel, RxVoid> PlayGame { get; private set; }
+    public ReactiveCommand<RxVoid, RxVoid> StartServer { get; private set; }
+    public ReactiveCommand<LauncherViewModel, RxVoid> CheckUpdates { get; private set; }
+    public ReactiveCommand<RxVoid, RxVoid> Close { get; private set; }
 
     [Reactive] public partial bool IsStartServer { get; set; } = false;
 

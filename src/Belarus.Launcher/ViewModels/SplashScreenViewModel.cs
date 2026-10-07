@@ -1,5 +1,3 @@
-using System.Reactive;
-
 using Belarus.Launcher.Core.Manager;
 using Belarus.Launcher.Models;
 
@@ -18,7 +16,7 @@ public partial class SplashScreenViewModel : ReactiveObject
     [Reactive] public partial int Progress { get; set; }
     public int MaxProgress { get; private set; }
 
-    public ReactiveCommand<Unit, Unit> Cancel { get; set; }
+    public ReactiveCommand<RxVoid, RxVoid> Cancel { get; set; }
 
     public SplashScreenViewModel(IWindowManager windowManager, ISplashScreenManager splashScreen,
         IApplicationLocaleManager localization)
@@ -32,10 +30,10 @@ public partial class SplashScreenViewModel : ReactiveObject
         this.WhenAnyValue(
             x => x.SplashScreen.CurrentProgress,
             x => x.SplashScreen.SplashScreenMessage)
-            .Subscribe(u =>
+            .Subscribe(values =>
             {
-                Progress = u.Item1;
-                InformationMessage = u.Item2;
+                Progress = values.Property1;
+                InformationMessage = values.Property2;
             });
 
         Cancel = ReactiveCommand.Create(CancelImpl);

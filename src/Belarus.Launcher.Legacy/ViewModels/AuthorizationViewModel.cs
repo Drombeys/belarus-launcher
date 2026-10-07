@@ -1,5 +1,3 @@
-using System.Reactive.Linq;
-
 using Belarus.Launcher.Core.Manager;
 using Belarus.Launcher.Core.Models;
 using Belarus.Launcher.Legacy.Manager;
@@ -16,8 +14,8 @@ public partial class AuthorizationViewModel : ViewModelBase, IRoutableViewModel
 
     [Reactive] public partial string UserName { get; set; } = string.Empty;
 
-    public ReactiveCommand<Unit, Unit> Next { get; private set; } = null!;
-    public ReactiveCommand<Unit, Unit> Close { get; private set; } = null!;
+    public ReactiveCommand<RxVoid, RxVoid> Next { get; private set; } = null!;
+    public ReactiveCommand<RxVoid, RxVoid> Close { get; private set; } = null!;
 
     public string? UrlPathSegment { get; set; } = "";
 

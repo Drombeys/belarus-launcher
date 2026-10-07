@@ -1,5 +1,3 @@
-using System.Reactive.Linq;
-
 using Belarus.Launcher.Core.Manager;
 using Belarus.Launcher.Core.Models;
 using Belarus.Launcher.Legacy.Manager;
@@ -15,8 +13,8 @@ public partial class StartGameViewModel : ViewModelBase, IRoutableViewModel
 
     [Reactive] public partial string IpAddress { get; set; } = string.Empty;
 
-    public ReactiveCommand<Unit, Unit> StartGame { get; private set; } = null!;
-    public ReactiveCommand<Unit, Unit> Back { get; private set; } = null!;
+    public ReactiveCommand<RxVoid, RxVoid> StartGame { get; private set; } = null!;
+    public ReactiveCommand<RxVoid, RxVoid> Back { get; private set; } = null!;
 
     public string? UrlPathSegment { get; set; } = "StartGameViewModel";
 

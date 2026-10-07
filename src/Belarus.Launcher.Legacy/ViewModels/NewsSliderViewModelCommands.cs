@@ -1,15 +1,14 @@
 using System.Diagnostics;
-using System.Reactive.Linq;
 
 namespace Belarus.Launcher.ViewModels;
 
 public partial class NewsSliderViewModel
 {
-    public ReactiveCommand<Unit, Unit> GoNext { get; set; } = null!;
-    public ReactiveCommand<Unit, Unit> GoBack { get; set; } = null!;
-    public ReactiveCommand<Unit, Unit> GoVk { get; set; } = null!;
-    public ReactiveCommand<Unit, Unit> GoApPro { get; set; } = null!;
-    public ReactiveCommand<Unit, Unit> GoTg { get; set; } = null!;
+    public ReactiveCommand<RxVoid, RxVoid> GoNext { get; set; } = null!;
+    public ReactiveCommand<RxVoid, RxVoid> GoBack { get; set; } = null!;
+    public ReactiveCommand<RxVoid, RxVoid> GoVk { get; set; } = null!;
+    public ReactiveCommand<RxVoid, RxVoid> GoApPro { get; set; } = null!;
+    public ReactiveCommand<RxVoid, RxVoid> GoTg { get; set; } = null!;
 
     private void SetupCommands()
     {
