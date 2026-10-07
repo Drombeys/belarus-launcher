@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
         <TargetFramework>net10.0</TargetFramework>
         <OutputType>Library</OutputType>
@@ -13,10 +13,6 @@
 
     <ItemGroup>
         <PackageReference Include="Avalonia" />
-        <PackageReference Include="Avalonia.Diagnostics">
-            <PrivateAssets Condition="'$(Configuration)' != 'Debug'">All</PrivateAssets>
-            <IncludeAssets Condition="'$(Configuration)' != 'Debug'">None</IncludeAssets>
-        </PackageReference>
         <PackageReference Include="Avalonia.Fonts.Inter" />
         <PackageReference Include="Avalonia.Themes.Fluent" />
         <PackageReference Include="Microsoft.Extensions.DependencyInjection" />
