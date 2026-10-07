@@ -222,4 +222,7 @@
   <data name="LocalizedStrings.CheckGameUpdate" xml:space="preserve">
       <value>Проверка обновлений игры</value>
   </data>
+  <data name="LocalizedStrings.StartupError" xml:space="preserve">
+    <value>Не удалось запустить лаунчер. Подробности — в логах.</value>
+  </data>
 </root>

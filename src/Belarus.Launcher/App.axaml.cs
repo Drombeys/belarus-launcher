@@ -1,6 +1,8 @@
 using Avalonia;
+using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
+using Avalonia.Media;
 
 using Belarus.Launcher.Core.FileHashVerification;
 using Belarus.Launcher.Core.Logger;
@@ -8,6 +10,7 @@ using Belarus.Launcher.Core.Manager;
 using Belarus.Launcher.Core.Services;
 using Belarus.Launcher.Core.Storage;
 using Belarus.Launcher.Injection;
+using Belarus.Launcher.Models;
 using Belarus.Launcher.Services;
 using Belarus.Launcher.ViewModels;
 using Belarus.Launcher.Views;
@@ -72,37 +75,100 @@ public partial class App : Application
     {
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
-            var initializerManager = _serviceProvider.GetRequiredService<InitializerManager>();
-            var userManager = _serviceProvider.GetRequiredService<UserManager>();
-            UserManager.MigratorSettings();
-
-            var splashScreenManager = _serviceProvider.GetRequiredService<ISplashScreenManager>();
-            splashScreenManager.MaxProgress = 4;
-
-            await userManager.LoadAsync(splashScreenManager.CancellationToken);
-            initializerManager.InitializeLocale();
-
-            var mainViewModel = _serviceProvider.GetRequiredService<MainWindowViewModel>();
-            desktop.MainWindow = new MainWindow
-            {
-                DataContext = mainViewModel
-            };
-            desktop.MainWindow.Show();
-
             try
             {
-                mainViewModel.ShowSplashScreenImpl();
-
-                await initializerManager.InitializeAsync(splashScreenManager);
-                await mainViewModel.InitializeAsync(splashScreenManager);
+                await InitializeApplicationAsync(desktop);
             }
-            catch (TaskCanceledException)
+            catch (OperationCanceledException)
             {
                 desktop.Shutdown();
                 return;
             }
+            catch (Exception exception)
+            {
+                HandleStartupError(desktop, exception);
+            }
         }
 
         base.OnFrameworkInitializationCompleted();
+    }
+
+    private async Task InitializeApplicationAsync(IClassicDesktopStyleApplicationLifetime desktop)
+    {
+        var initializerManager = _serviceProvider.GetRequiredService<InitializerManager>();
+        var userManager = _serviceProvider.GetRequiredService<UserManager>();
+        UserManager.MigratorSettings();
+
+        var splashScreenManager = _serviceProvider.GetRequiredService<ISplashScreenManager>();
+        splashScreenManager.MaxProgress = 4;
+
+        await userManager.LoadAsync(splashScreenManager.CancellationToken);
+        initializerManager.InitializeLocale();
+
+        var mainViewModel = _serviceProvider.GetRequiredService<MainWindowViewModel>();
+        desktop.MainWindow = new MainWindow
+        {
+            DataContext = mainViewModel
+        };
+        desktop.MainWindow.Show();
+
+        mainViewModel.ShowSplashScreenImpl();
+
+        await initializerManager.InitializeAsync(splashScreenManager);
+        await mainViewModel.InitializeAsync(splashScreenManager);
+    }
+
+    private void HandleStartupError(IClassicDesktopStyleApplicationLifetime desktop, Exception exception)
+    {
+        var logger = _serviceProvider.GetRequiredService<ILogger<App>>();
+        logger.LogCritical(exception, "Failed to initialize the launcher");
+
+        if (!TryShowStartupError(desktop, logger))
+        {
+            desktop.Shutdown();
+        }
+    }
+
+    private bool TryShowStartupError(IClassicDesktopStyleApplicationLifetime desktop, ILogger<App> logger)
+    {
+        try
+        {
+            var localeManager = _serviceProvider.GetRequiredService<IApplicationLocaleManager>();
+            var title = localeManager.GetStringByKey("LocalizedStrings.ErrorTitle");
+            var description = localeManager.GetStringByKey("LocalizedStrings.StartupError");
+
+            if (desktop.MainWindow is null)
+            {
+                var errorWindow = new Window
+                {
+                    Title = title,
+                    Width = 460,
+                    Height = 180,
+                    CanResize = false,
+                    WindowStartupLocation = WindowStartupLocation.CenterScreen,
+                    Content = new TextBlock
+                    {
+                        Margin = new Thickness(24),
+                        Text = description,
+                        TextWrapping = TextWrapping.Wrap,
+                    },
+                };
+
+                desktop.MainWindow = errorWindow;
+                errorWindow.Show();
+                return true;
+            }
+
+            var splashScreenManager = _serviceProvider.GetRequiredService<ISplashScreenManager>();
+            _serviceProvider.GetRequiredService<MainWindowViewModel>().ShowSplashScreenImpl();
+            splashScreenManager.UpdateInformation(new InformationMessage(title, description));
+
+            return true;
+        }
+        catch (Exception displayException)
+        {
+            logger.LogError(displayException, "Failed to display the startup error");
+            return false;
+        }
     }
 }

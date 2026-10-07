@@ -144,7 +144,7 @@ public class InitializerManager(
         {
 
             await LoadRemoteContent(userManager.UserSettings.Locale, splashScreenManager.CancellationToken);
-            await Task.Factory.StartNew(() => RemoteLoadWebResourcesAsync(cancellationToken: splashScreenManager.CancellationToken));
+            await RemoteLoadWebResourcesAsync(cancellationToken: splashScreenManager.CancellationToken);
         }
     }
 
@@ -180,7 +180,7 @@ public class InitializerManager(
         }
         else
         {
-            await Task.Factory.StartNew(() => RemoteLoadWebResourcesAsync(cancellationToken: cancellationToken), cancellationToken);
+            await RemoteLoadWebResourcesAsync(cancellationToken: cancellationToken);
         }
     }
 
@@ -211,11 +211,11 @@ public class InitializerManager(
     {
         if (launcherStorage.IsUserAuthorized)
         {
-            await Task.Factory.StartNew(() => RemoteLoadNewsAsync(locale, cancellationToken), cancellationToken);
+            await RemoteLoadNewsAsync(locale, cancellationToken);
         }
         else
         {
-            await Task.Factory.StartNew(() => RemoteLoadNewsAsync(cancellationToken: cancellationToken), cancellationToken);
+            await RemoteLoadNewsAsync(cancellationToken: cancellationToken);
         }
     }
 
