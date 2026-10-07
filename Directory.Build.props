@@ -19,5 +19,6 @@
     <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
         <DebugSymbols>false</DebugSymbols>
         <DebugType>None</DebugType>
+        <CopyOutputSymbolsToPublishDirectory>false</CopyOutputSymbolsToPublishDirectory>
     </PropertyGroup>
 </Project>

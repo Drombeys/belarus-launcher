@@ -1,6 +1,8 @@
+using System.ComponentModel;
+
 namespace Belarus.Launcher.Core.Manager;
 
-public interface IApplicationLocaleManager
+public interface IApplicationLocaleManager : INotifyPropertyChanged
 {
     void SetLocale(string locale);
     string Locale { get; }

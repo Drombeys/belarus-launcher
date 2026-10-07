@@ -19,6 +19,7 @@
     <PropertyGroup Condition="'$(Configuration)' == 'Release'">
         <ApplicationManifest>app.manifest</ApplicationManifest>
         <PublishAot>true</PublishAot>
+        <CopyOutputSymbolsToPublishDirectory>false</CopyOutputSymbolsToPublishDirectory>
     </PropertyGroup>
 
     <ItemGroup>

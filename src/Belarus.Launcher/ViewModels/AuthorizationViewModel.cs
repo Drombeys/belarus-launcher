@@ -136,7 +136,7 @@ public partial class AuthorizationViewModel : ReactiveValidationObject, IDisposa
             SetupValidation();
         });
 
-        this.WhenAnyValue(x => x.SelectedLanguage.Key)
+        this.WhenAnyValue(x => x.SelectedLanguage, lang => lang.Key)
             .Where(key => !string.IsNullOrEmpty(key))
             .ObserveOn(RxSchedulers.MainThreadScheduler)
             .InvokeCommand(UpdateInterfaceCommand);

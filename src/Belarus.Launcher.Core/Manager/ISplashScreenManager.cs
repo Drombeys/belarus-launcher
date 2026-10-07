@@ -1,8 +1,10 @@
-﻿using Belarus.Launcher.Models;
+using System.ComponentModel;
+
+using Belarus.Launcher.Models;
 
 namespace Belarus.Launcher.Core.Manager;
 
-public interface ISplashScreenManager
+public interface ISplashScreenManager : INotifyPropertyChanged
 {
     CancellationToken CancellationToken { get; }
     InformationMessage SplashScreenMessage { get; }

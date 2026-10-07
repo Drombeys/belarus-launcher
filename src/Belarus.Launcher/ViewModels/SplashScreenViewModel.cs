@@ -27,9 +27,9 @@ public partial class SplashScreenViewModel : ReactiveObject
         Progress = SplashScreen.CurrentProgress;
         MaxProgress = SplashScreen.MaxProgress;
 
-        this.WhenAnyValue(
-            x => x.SplashScreen.CurrentProgress,
-            x => x.SplashScreen.SplashScreenMessage)
+        SplashScreen.WhenAnyValue(
+            x => x.CurrentProgress,
+            x => x.SplashScreenMessage)
             .Subscribe(values =>
             {
                 Progress = values.Property1;

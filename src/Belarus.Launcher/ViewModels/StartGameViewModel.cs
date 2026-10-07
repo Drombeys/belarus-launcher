@@ -55,9 +55,9 @@ public partial class StartGameViewModel : ReactiveValidationObject, IDisposable
         StartGame = ReactiveCommand.Create(StartGameImpl, this.IsValid());
         Back = ReactiveCommand.Create<MainWindowViewModel>(BackImpl);
 
-        this.WhenAnyValue(x => x.Localization.Locale)
+        Localization.WhenAnyValue(x => x.Locale)
             .ObserveOn(RxSchedulers.MainThreadScheduler)
-            .Subscribe(x =>
+            .Subscribe(_ =>
             {
                 _disposables?.Dispose();
                 SetupValidation();

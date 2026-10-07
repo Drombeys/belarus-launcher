@@ -32,7 +32,7 @@ public partial class LinkViewModel : ReactiveObject
 
         this.WhenAnyValue(x => x._launcherStorage.WebResources)
             .Where(webRes => webRes != null && webRes.Any())
-            .Subscribe((n) => Init());
+            .Subscribe(_ => Init());
     }
 
     private void Init()

@@ -113,7 +113,7 @@ public partial class NewsSliderViewModel : ReactiveObject
 
         this.WhenAnyValue(x => x._launcherStorage.NewsContents)
             .Where(news => news != null && !string.IsNullOrEmpty(_localeManager.Locale) && news.Any())
-            .Subscribe((n) =>
+            .Subscribe(_ =>
             {
                 var locale = _localeManager.Locale;
                 ReloadNews(locale);
